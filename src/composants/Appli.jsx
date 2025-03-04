@@ -1,11 +1,16 @@
 import './Appli.scss';
+import Header from './Header';
+import ListeDossier from './ListeDossier';
 
 function Appli() {
 
   return (
     <div className='Appli'>
-      APPLI
+     <Header/>
+     <ListeDossier/>
     </div>
+     
+   
   )
 }
 
