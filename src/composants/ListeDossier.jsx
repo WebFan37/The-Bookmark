@@ -1,13 +1,25 @@
 import './ListeDossier.scss';
 import Dossier from './Dossier.jsx';
 import Dossiers from '../data/liste-dossiers.json';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import { useState } from 'react';
 
 function ListeDossier() {
 
+  const [etatBouton, setEtatBouton] = useState(false);
+
+  function ajouterSignet(){
+
+    setEtatBouton(!etatBouton);
+    console.log('Ajouter un signet', etatBouton);
+  }
 
     
   return (
-    <ul className="ListeDossier">
+
+    <div>
+      <ul className="ListeDossier">
        {
        Dossiers.map(doss => (
         <Dossier key={doss.id} {...doss}/>
@@ -15,6 +27,12 @@ function ListeDossier() {
        )
        } 
     </ul>
+    <Fab color="primary" aria-label="add">
+      <AddIcon onClick={ajouterSignet} /> 
+    </Fab>  
+
+    </div>
+    
   )
 }
 
