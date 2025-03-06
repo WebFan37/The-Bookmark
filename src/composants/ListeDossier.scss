@@ -1,9 +1,21 @@
 .ListeDossier{
-    margin: 2rem 0;
+    ul{
+        margin: 2rem 0;
     padding: 1rem;
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
+    position: relative;
+    }
+    
+    
+
+    .boutonAjouter{
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        margin: 1rem;
+    }
 }

@@ -18,17 +18,17 @@ function ListeDossier() {
     
   return (
 
-    <div>
-      <ul className="ListeDossier">
+    <div className="ListeDossier">
+      <ul >
        {
        Dossiers.map(doss => (
         <Dossier key={doss.id} {...doss}/>
         )
        )
        } 
-    </ul>
-    <Fab color="primary" aria-label="add">
-      <AddIcon onClick={ajouterSignet} /> 
+      </ul>
+    <Fab color="primary" aria-label="add" onClick={ajouterSignet} className='boutonAjouter' >
+      <AddIcon/> 
     </Fab>  
 
     </div>
