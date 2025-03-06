@@ -4,6 +4,7 @@ import Dossiers from '../data/liste-dossiers.json';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
+import Form from './Form.jsx';
 
 function ListeDossier() {
 
@@ -11,7 +12,7 @@ function ListeDossier() {
 
   function ajouterSignet(){
 
-    setEtatBouton(!etatBouton);
+    setEtatBouton(true);
     console.log('Ajouter un signet', etatBouton);
   }
 
@@ -30,6 +31,8 @@ function ListeDossier() {
     <Fab color="primary" aria-label="add" onClick={ajouterSignet} className='boutonAjouter' >
       <AddIcon/> 
     </Fab>  
+
+    {etatBouton && <Form etatBouton={etatBouton} setEtatBouton={setEtatBouton}/>}
 
     </div>
     
