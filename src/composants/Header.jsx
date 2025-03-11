@@ -1,4 +1,7 @@
 import './Header.scss';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+
 
 function Header() {
 
@@ -6,7 +9,9 @@ function Header() {
     <div className='Header'>
       <div className="logo">Signets</div>
       <div className="utilisateur">
-        Janne Zhang Ellison
+        
+        <Avatar alt='Testing' src='images/avatar.png'/>
+        User
       </div>
     </div>
   )
