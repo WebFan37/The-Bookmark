@@ -9,22 +9,34 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Colorful from '@uiw/react-color-colorful'
 import { useState } from 'react';
 
-export default function Form({etatBouton, setEtatBouton, action}) {
+export default function Form({ouvert, setOuvert, action, dossier={}}) {
 
-  const [titre, setTitre] = useState('')
-  const [couverture, setCouverture] = useState('')
-  const [couleur, setCouleur] = useState('#000')
+  const [titre, setTitre] = useState(dossier.titre || '')
+  const [couverture, setCouverture] = useState(dossier.couverture || '')
+  const [couleur, setCouleur] = useState(dossier.couleur || '#000')
 
-    function fermer(){
-        setEtatBouton(false);
+  const etiquette = (dossier.id) ? "Modifier" : "Ajouter"
+
+
+  function fermer(){
+      setOuvert(false);
+  }
+  
+  function ajouter(){
+
+    //Si dossier avec id existe 
+    if(dossier.id){
+      //Ouvrir le prompt avec dossier id ainsi que les autres info
+      action(dossier.id, titre, couverture, couleur)
+    } else {
+       //Sinon, seulement titre, couverture et couleur
+      action(titre, couverture, couleur)
     }
-    function ajouter(){
-       //1) etape Ajouter
-       action(titre, couverture, couleur)
+    
 
-       //2) etape fermer
-       fermer()
-    }
+      //2) etape fermer
+      fermer()
+  }
 
 
     
@@ -33,12 +45,12 @@ export default function Form({etatBouton, setEtatBouton, action}) {
    
       <Dialog 
       className="Form"
-      open={etatBouton}
+      open={ouvert}
       onClose={fermer}
         // onClose={handleClose}
         
       >
-        <DialogTitle>Subscribe</DialogTitle>
+        <DialogTitle>{etiquette}Subscribe</DialogTitle>
         <DialogContent>
           <DialogContentText>
             To subscribe to this website, please enter your email address here. We

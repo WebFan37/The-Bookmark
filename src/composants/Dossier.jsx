@@ -4,9 +4,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Fab from '@mui/material/Fab';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import IconButton from '@mui/material/IconButton';
+import Form from './Form.jsx'
 import { useState } from 'react';
 
-function Dossier({id, titre, dateModif, couleur, supprimer, couverture}) {
+function Dossier({id, titre, dateModif, couleur, supprimer, couverture, modifier}) {
+
+  const [ouvert, setOuvert] = useState(false)
+console.log(ouvert);
 
   const [etatTourner, setEtatTourner] = useState(false);
 
@@ -15,8 +19,8 @@ function Dossier({id, titre, dateModif, couleur, supprimer, couverture}) {
     // console.log(etatTourner);
     
   }
-  function edit(){
-    alert('Is in progress ')
+  function action(){
+    modifier(id);
   }
 
   function action2(){
@@ -30,9 +34,10 @@ function Dossier({id, titre, dateModif, couleur, supprimer, couverture}) {
           <IconButton  aria-label="add" className='rotation' onClick={tourner}>
             <Rotate/>
           </IconButton> 
-          <IconButton  aria-label="add" className='edit' onClick={edit}>
+          <IconButton  aria-label="add" className='edit' onClick={()=>setOuvert(true)}>
             <ModeEditIcon/>
           </IconButton> 
+          {ouvert && <Form dossier={{id, titre, couverture, couleur}} ouvert={ouvert} setOuvert={setOuvert} action={modifier}/>}
             
             <img src={couverture} alt={titre} />
         </div>

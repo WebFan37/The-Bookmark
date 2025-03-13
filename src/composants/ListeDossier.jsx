@@ -8,7 +8,7 @@ import Form from './Form.jsx';
 
 function ListeDossier({dossiers, setDossiers}) {
 
-  const [etatBouton, setEtatBouton] = useState(false);
+  const [ouvert, setOuvert] = useState(false);
 
   function ajouterSignet(){
 
@@ -16,22 +16,52 @@ function ListeDossier({dossiers, setDossiers}) {
     console.log('Ajouter un signet', etatBouton);
   }
 
-  //FONCTION IMPORTANTE
+  //FONCTION IMPORTANTE AJOUTER
   function ajouter(titre, couverture, couleur){
     const nouveauObjet = {
-      id: crypto.randomUUID, 
+      id: crypto.randomUUID(), 
       titre: titre,
       couleur: couleur, 
       couverture: couverture,
       dateModif: Date.now(), 
     } 
+    //Etaler l'ancien tableau
+    //Ajouter nouveau element
     setDossiers([...dossiers, nouveauObjet])
 
-    console.log(nouveauObjet)
+    // console.log(nouveauObjet)
   }
 
+  //========FONCTION
   function supprimer(id){
+
+    //doss.id!=id retourne false quand ils sont egaux
     setDossiers(dossiers.filter((doss)=> doss.id!=id ));
+  }
+
+  //=====FONCTION MODIFIER==//
+  //=======================//
+  function modifier(id, titre, couverture, couleur){
+    setDossiers(dossiers.map(
+      doss => {
+        //Si id du map n'est pas la meme
+        //ne fait rien 
+        if(doss.id != id){
+          return doss;
+
+          //Si meme,
+          //retourner ces elements 
+        } else {
+          return {
+            id: id,
+            titre: titre,
+            couverture: couverture,
+            couleur: couleur,
+            dateModification: Date.now()
+          }
+        }
+      }
+    ))
   }
   
 
@@ -42,7 +72,14 @@ function ListeDossier({dossiers, setDossiers}) {
       <ul >
        {
        dossiers.map(doss => (
-        <Dossier key={doss.id} {...doss} supprimer={supprimer}/>
+
+        <Dossier 
+        key={doss.id} 
+        {...doss} 
+        supprimer={supprimer} 
+        modifier={modifier}
+        />
+
         )
        )
        } 
@@ -51,7 +88,7 @@ function ListeDossier({dossiers, setDossiers}) {
       <AddIcon/> 
     </Fab>  
 
-    {etatBouton && <Form etatBouton={etatBouton} setEtatBouton={setEtatBouton} action={ajouter}/>}
+    {ouvert && <Form ouvert={ouvert} setOuvert={setOuvert} action={ajouter}/>}
 
    
 

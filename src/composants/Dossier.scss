@@ -1,7 +1,7 @@
 .Dossier{
     position: relative;
-    min-width: 250px;
-    min-height: 290px;
+    width: 250px;
+    height: 290px;
     color: white;
     display: flex;
     flex-direction: column;
@@ -38,13 +38,16 @@
             margin: 0.5rem;
             background-color: rgba(128, 128, 128, 0.561);
         }
+        img{
+            width: 100%;
+        }
+        
     }
 
     
 }
 .Dossier:hover{
     box-shadow: 0 0 15px 3px black;
-    transform: scale(1.05);
     transition: all 0.5s;
 }
 
