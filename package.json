@@ -18,6 +18,7 @@
     "@mui/material": "^6.4.7",
     "@uiw/react-color": "^2.4.1",
     "@uiw/react-color-colorful": "^2.4.1",
+    "firebase": "^11.6.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
