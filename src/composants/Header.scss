@@ -18,5 +18,19 @@
     .utilisateur{
         align-items: center;
         cursor: pointer;
+
+        button{
+            padding: 0.5rem 1rem;
+            background-color: darkred;
+
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-left: 1rem;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: red;
+        }
     }
 }

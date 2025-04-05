@@ -8,7 +8,7 @@ export function connexion(){
 }
 
 export function deconnexion(){
-
+    signOut(firebaseAuth)
 }
 
 export function observerEtatConnexion(mutateurUtilisateur){
