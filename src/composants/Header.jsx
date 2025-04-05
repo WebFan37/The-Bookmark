@@ -3,15 +3,14 @@ import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 
 
-function Header() {
+function Header({utilisateur}) {
 
   return (
     <div className='Header'>
       <div className="logo">Signets</div>
       <div className="utilisateur">
-        
-        <Avatar alt='Testing' src='images/avatar.png'/>
-        User
+        <p>{utilisateur.displayName}</p>
+        <Avatar alt={utilisateur.displayName} src={utilisateur.photoURL}/>
       </div>
     </div>
   )
