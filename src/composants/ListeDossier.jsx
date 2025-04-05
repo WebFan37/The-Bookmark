@@ -12,7 +12,7 @@ function ListeDossier({dossiers, setDossiers}) {
 
   function ajouterSignet(){
 
-    setEtatBouton(true);
+    setOuvert(true);
     console.log('Ajouter un signet', etatBouton);
   }
 
@@ -69,21 +69,34 @@ function ListeDossier({dossiers, setDossiers}) {
   return (
 
     <div className="ListeDossier">
-      <ul >
-       {
-       dossiers.map(doss => (
 
-        <Dossier 
-        key={doss.id} 
-        {...doss} 
-        supprimer={supprimer} 
-        modifier={modifier}
-        />
+      {
+        // Si le tableau est vide
+        // Afficher le message Aucun dossier
+        // Sinon, afficher le tableau
+        dossiers.length == 0 ? 
+        <div className="aucunDossier">
+          WHOOO PAS DE SIGNET ! AJOUTER UN SIGNET
+          </div> :
 
-        )
-       )
-       } 
-      </ul>
+<ul >
+{
+dossiers.map(doss => (
+
+ <Dossier 
+ key={doss.id} 
+ {...doss} 
+ supprimer={supprimer} 
+ modifier={modifier}
+ />
+
+ )
+)
+} 
+</ul>
+
+      }
+      
     <Fab color="primary" aria-label="add" onClick={ajouterSignet} className='boutonAjouter' >
       <AddIcon/> 
     </Fab>  

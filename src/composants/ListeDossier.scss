@@ -1,4 +1,11 @@
 .ListeDossier{
+
+    .aucunDossier{
+
+        display: flex;
+        justify-content: center;
+
+    }
     ul{
         margin: 2rem 0;
     padding: 1rem;

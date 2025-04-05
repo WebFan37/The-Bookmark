@@ -7,6 +7,9 @@ import IconButton from '@mui/material/IconButton';
 import Form from './Form.jsx'
 import { useState } from 'react';
 
+//FAIT DE LA MAISON
+import couvertureDefault from '../images/img-default.jpg';
+
 function Dossier({id, titre, dateModif, couleur, supprimer, couverture, modifier}) {
 
   const [ouvert, setOuvert] = useState(false)
@@ -39,7 +42,15 @@ console.log(ouvert);
           </IconButton> 
           {ouvert && <Form dossier={{id, titre, couverture, couleur}} ouvert={ouvert} setOuvert={setOuvert} action={modifier}/>}
             
-            <img src={couverture} alt={titre} />
+            <img 
+            src={ couverture || couvertureDefault} 
+            alt={titre} 
+
+            // SI JAMAIS IL Y A PROCESSSUS D'ERREUR
+            // Changer l'image par une autre dans la section dossier src 
+            onError={event => event.target.src  = couvertureDefault}
+            />
+            
         </div>
 
         <div className="info" style={{backgroundColor: couleur}}>
