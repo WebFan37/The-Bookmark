@@ -3,7 +3,6 @@ import './PageUtilisateur.scss';
 import Header from './Header';
 import ListeDossier from './ListeDossier';
 import { useEffect } from 'react';
-import Dossier from './Dossier';
 
 function PageUtilisateur({utilisateur}) {
   

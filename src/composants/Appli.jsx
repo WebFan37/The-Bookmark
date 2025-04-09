@@ -7,7 +7,6 @@ import { useEffect } from 'react';
 
 import Accueil from './Accueil';
 import PageUtilisateur from './PageUtilisateur';
-import { use } from 'react';
 import { observerEtatConnexion } from '../code/utilisateur';
 
 function Appli() {
