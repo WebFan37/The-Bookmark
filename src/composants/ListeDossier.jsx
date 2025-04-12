@@ -5,8 +5,9 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
 import Form from './Form.jsx';
+import { create } from '../code/dossier.js';
 
-function ListeDossier({dossiers, setDossiers}) {
+function ListeDossier({dossiers, setDossiers, utilisateur}) {
 
   const [ouvert, setOuvert] = useState(false);
 
@@ -16,15 +17,20 @@ function ListeDossier({dossiers, setDossiers}) {
     console.log('Ajouter un signet', etatBouton);
   }
 
-  //FONCTION IMPORTANTE AJOUTER
-  function ajouter(titre, couverture, couleur){
+  //FONCTION IMPORTANTE AJOUTER en async mode
+   async function ajouter(titre, couverture, couleur){
     const nouveauObjet = {
-      id: crypto.randomUUID(), 
       titre: titre,
       couleur: couleur, 
       couverture: couverture,
-      dateModif: Date.now(), 
+    
     } 
+
+    //!!!!========!!/
+    //FIRESTORE create
+    const idDossier = await create(utilisateur.uid, nouveauObjet)
+
+    nouveauObjet.id = idDossier
     //Etaler l'ancien tableau
     //Ajouter nouveau element
     setDossiers([...dossiers, nouveauObjet])

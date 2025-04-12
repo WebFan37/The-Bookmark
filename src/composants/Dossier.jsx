@@ -55,7 +55,7 @@ console.log(ouvert);
 
         <div className="info" style={{backgroundColor: couleur}}>
             <h2>{titre}</h2>
-            <p>Modified: {dateModif}</p>
+            <p>Modified: </p>
 
             <IconButton aria-label="add" className='suppression' onClick={action2}>
             <DeleteIcon/>

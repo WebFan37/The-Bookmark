@@ -3,23 +3,38 @@ import './PageUtilisateur.scss';
 import Header from './Header';
 import ListeDossier from './ListeDossier';
 import { useEffect } from 'react';
+import { lire } from '../code/dossier';
 
 function PageUtilisateur({utilisateur}) {
   
-  const [dossiers, setDossiers] = useState(
-    ()=> {
-     return JSON.parse(localStorage.getItem('signets-dossier')) || []
-    }
-  )
+  const [dossiers, setDossiers] = useState([])
+  //Pas besoin de UseEffect
+
+  //LIRE DOSSIER dans FireStore
+  async function lireDossiers(){
+    const dossierFS = await lire(utilisateur.uid)
+
+
+    //Map le dossierFS
+    setDossiers(
+      dossierFS.map(
+        dossier => ({id: dossier.id, ...dossier.data()})
+      )
+    )
+    
+  }
+
   useEffect(
-    ()=> window.localStorage.setItem('signets-dossier', JSON.stringify(dossiers)), [dossiers]
+    ()=> {lireDossiers()}, //Accolat == return qqch. {}
+     []
+    
   )
  
 
   return (
     <div className='PageUtilisateur'>
      <Header utilisateur={utilisateur}/>
-     <ListeDossier dossiers={dossiers} setDossiers={setDossiers}/>
+     <ListeDossier utilisateur={utilisateur} dossiers={dossiers} setDossiers={setDossiers}/>
     </div>
      
    
