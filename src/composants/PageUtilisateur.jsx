@@ -12,15 +12,7 @@ function PageUtilisateur({utilisateur}) {
 
   //LIRE DOSSIER dans FireStore
   async function lireDossiers(){
-    const dossierFS = await lire(utilisateur.uid)
-
-
-    //Map le dossierFS
-    setDossiers(
-      dossierFS.map(
-        dossier => ({id: dossier.id, ...dossier.data()})
-      )
-    )
+    setDossiers (await lire(utilisateur.uid))
     
   }
 

@@ -5,7 +5,7 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
 import Form from './Form.jsx';
-import { create } from '../code/dossier.js';
+import { create, supprimerDoss } from '../code/dossier.js';
 
 function ListeDossier({dossiers, setDossiers, utilisateur}) {
 
@@ -28,9 +28,8 @@ function ListeDossier({dossiers, setDossiers, utilisateur}) {
 
     //!!!!========!!/
     //FIRESTORE create
-    const idDossier = await create(utilisateur.uid, nouveauObjet)
+    const dossier = await create(utilisateur.uid, nouveauObjet)
 
-    nouveauObjet.id = idDossier
     //Etaler l'ancien tableau
     //Ajouter nouveau element
     setDossiers([...dossiers, nouveauObjet])
@@ -40,6 +39,8 @@ function ListeDossier({dossiers, setDossiers, utilisateur}) {
 
   //========FONCTION
   function supprimer(id){
+    //Supprimer le dossier du FireStore
+    supprimerDoss(utilisateur.uid, id);
 
     //doss.id!=id retourne false quand ils sont egaux
     setDossiers(dossiers.filter((doss)=> doss.id!=id ));
@@ -48,6 +49,9 @@ function ListeDossier({dossiers, setDossiers, utilisateur}) {
   //=====FONCTION MODIFIER==//
   //=======================//
   function modifier(id, titre, couverture, couleur){
+    //Modifier dans firestore
+     changer(utilisateur.uid, id, {id, titre, couverture, couleur});
+
     setDossiers(dossiers.map(
       doss => {
         //Si id du map n'est pas la meme

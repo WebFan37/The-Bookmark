@@ -1,5 +1,5 @@
 // DATA MANAGEMENT
-import {doc, collection, query, setDoc, addDoc, getDoc, updateDoc, deleteDoc, serverTimestamp} from "firebase/firestore"
+import {doc, collection, query, setDoc, addDoc, getDoc, updateDoc, deleteDoc, serverTimestamp, getDocs} from "firebase/firestore"
 import { bd, collDossier, collUtil } from "./init"
 import { ref } from "firebase/storage"
 
@@ -15,30 +15,39 @@ import { ref } from "firebase/storage"
  * @returns {Promise<string>}
  */
 export async function create (idUtil, infoDossier) {
-    const refDoss = doc(collection(bd, collUtil, idUtil, collDossier));
-
-    //TimeStamp
+     //TimeStamp
     infoDossier.dateModif = serverTimestamp();
-    await setDoc(refDoss, infoDossier);
 
-    return refDoss.id;
+    const refDoss = await addDoc(collection(bd, collUtil, idUtil, collDossier), infoDossier);
+
+    const dossier = await getDoc(refDoss)
+
+  
+    //Retourn identifiant du document
+    return ({...dossier.data(), id: dossier.id});
 }
 /***
+ * Retourne tous les dossiers d'un utilisateur
  * @param {string} idUtil: identifiant utilisateur
  * @returns {array} : tableau des dossiers de cet utilisateur
  * 
  */
 export async function lire(idUtil){
     //Query peut faire des recherches
- const dossiers = await getDoc(query(collection(bd, collUtil, idUtil, collDossier)))
- return dossiers.doc;
+ const dossiers = await getDocs(query(collection(bd, collUtil, idUtil, collDossier)))
+ return dossiers.docs.map(dossFS => ({...data(), id: dossFS.id}));
 }
 
 
-export function modifier (){
-
+export async function changer (idUtil, idDoc, infoDossier){
+    await updateDoc(doc(bd, collUtil, idUtil, collDossier, idDoc), infoDossier)
 }
 
-export function supprimer (){
-
+/**
+ * Supprime un dossier pour un utilisateur
+ * @param {string} idUtil : identifiant utilisateur
+ * @param {string} idDoc : identifiant doc supprimer
+ */
+export async function supprimerDoss (idUtil, idDoc){
+    await deleteDoc(doc(bd, collUtil, idUtil, collDossier, idDoc))
 }
