@@ -35,7 +35,9 @@ export async function create (idUtil, infoDossier) {
 export async function lire(idUtil){
     //Query peut faire des recherches
  const dossiers = await getDocs(query(collection(bd, collUtil, idUtil, collDossier)))
- return dossiers.docs.map(dossFS => ({...data(), id: dossFS.id}));
+
+ //Return dossier avec mapping chaque dossier 
+ return dossiers.docs.map(dossFS => ({... dossFS.data(), id: dossFS.id}));
 }
 
 
