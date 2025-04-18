@@ -9,6 +9,7 @@ import { useState } from 'react';
 
 //FAIT DE LA MAISON
 import couvertureDefault from '../images/img-default.jpg';
+import { formaterDate } from '../code/util.js';
 
 function Dossier({id, titre, dateModif, couleur, supprimer, couverture, modifier}) {
 
@@ -55,7 +56,10 @@ console.log(ouvert);
 
         <div className="info" style={{backgroundColor: couleur}}>
             <h2>{titre}</h2>
-            <p>Modified: </p>
+
+            {/* FORMATER LA DATE AVEC FONCTION UTIL.JS formaterDate */}
+            {/* AVEC "Langue" */}
+            <p>Modified:{formaterDate(dateModif.seconds*1000, "fr")} </p>
 
             <IconButton aria-label="add" className='suppression' onClick={action2}>
             <DeleteIcon/>

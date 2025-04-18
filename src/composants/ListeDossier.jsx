@@ -5,7 +5,10 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
 import Form from './Form.jsx';
-import { create, supprimerDoss } from '../code/dossier.js';
+
+//Important to know. Import everything from that file
+//====================//
+import * as dossierModel from '../code/dossier.js';
 
 function ListeDossier({dossiers, setDossiers, utilisateur}) {
 
@@ -28,7 +31,7 @@ function ListeDossier({dossiers, setDossiers, utilisateur}) {
 
     //!!!!========!!/
     //FIRESTORE create
-    const dossier = await create(utilisateur.uid, nouveauObjet)
+    const dossier = await dossierModel.create(utilisateur.uid, nouveauObjet)
 
     //Etaler l'ancien tableau
     //Ajouter nouveau element
@@ -40,7 +43,7 @@ function ListeDossier({dossiers, setDossiers, utilisateur}) {
   //========FONCTION
   function supprimer(id){
     //Supprimer le dossier du FireStore
-    supprimerDoss(utilisateur.uid, id);
+    dossierModel.supprimerDoss(utilisateur.uid, id);
 
     //doss.id!=id retourne false quand ils sont egaux
     setDossiers(dossiers.filter((doss)=> doss.id!=id ));
@@ -48,9 +51,9 @@ function ListeDossier({dossiers, setDossiers, utilisateur}) {
 
   //=====FONCTION MODIFIER==//
   //=======================//
-  function modifier(id, titre, couverture, couleur){
+  async function modifier(id, titre, couverture, couleur){
     //Modifier dans firestore
-     changer(utilisateur.uid, id, {id, titre, couverture, couleur});
+     const dossierModifieFS = await dossierModel.changer(utilisateur.uid, id, {id, titre, couverture, couleur});
 
     setDossiers(dossiers.map(
       doss => {
@@ -62,13 +65,7 @@ function ListeDossier({dossiers, setDossiers, utilisateur}) {
           //Si meme,
           //retourner ces elements 
         } else {
-          return {
-            id: id,
-            titre: titre,
-            couverture: couverture,
-            couleur: couleur,
-            dateModification: Date.now()
-          }
+          return dossierModifieFS
         }
       }
     ))

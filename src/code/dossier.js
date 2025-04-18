@@ -42,7 +42,15 @@ export async function lire(idUtil){
 
 
 export async function changer (idUtil, idDoc, infoDossier){
-    await updateDoc(doc(bd, collUtil, idUtil, collDossier, idDoc), infoDossier)
+    const refDossier = doc(bd, collUtil, idUtil, collDossier, idDoc)
+    await updateDoc(refDossier, infoDossier)
+
+
+    const dossier = await getDoc(refDossier)
+
+  
+    //Retourn identifiant du document
+    return ({...dossier.data(), id: dossier.id});
 }
 
 /**
