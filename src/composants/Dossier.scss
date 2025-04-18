@@ -6,9 +6,27 @@
     display: flex;
     flex-direction: column;
 
-    
+    //Interesting to know
+    perspective: 1000px;
 
-    .info{
+    .carte{
+        width: 100%;
+        height: 100%;
+
+        //Interesting to know
+        transform-style: preserve-3d;
+        
+         transition: transform 0.3s;
+
+         &.active{
+            transform: rotateY(0.5turn);
+         }
+
+
+        .endroit{
+            position: absolute;
+            backface-visibility: hidden;
+        .info{
         height: 100%;
         position: relative;
 
@@ -19,30 +37,51 @@
             margin: 0.5rem;
             background-color: rgba(128, 128, 128, 0.561);
         }
-    }
-    .couverture{
-        position: relative;
+        }
+        .couverture{
+            position: relative;
 
-        .rotation{
-            position: absolute;
-            left: 0;
-            top: 0;
-            margin: 0.5rem;
-            background-color: rgba(128, 128, 128, 0.561);
+            .rotation{
+                position: absolute;
+                left: 0;
+                top: 0;
+                margin: 0.5rem;
+                background-color: rgba(128, 128, 128, 0.561);
+            }
+
+            .edit{
+                position: absolute;
+                right: 0;
+                top: 0;
+                margin: 0.5rem;
+                background-color: rgba(128, 128, 128, 0.561);
+            }
+            img{
+                width: 100%;
+            }
+            
+        }
         }
 
-        .edit{
+        .envers{
+            width: 250px;
+            min-height: 290px;
+            background-color: rgb(89, 138, 138);
             position: absolute;
-            right: 0;
-            top: 0;
-            margin: 0.5rem;
-            background-color: rgba(128, 128, 128, 0.561);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+
+
+            //Tourner la carte
+            transform: rotateY(0.5turn);
+
+            backface-visibility: hidden;
+
         }
-        img{
-            width: 100%;
-        }
-        
     }
+
 
     
 }

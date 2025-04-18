@@ -18,6 +18,8 @@ console.log(ouvert);
 
   const [etatTourner, setEtatTourner] = useState(false);
 
+  const [carteActive, setCarteActive] = useState(false)
+
   function tourner(){
     setEtatTourner(true)
     // console.log(etatTourner);
@@ -32,10 +34,16 @@ console.log(ouvert);
   }
 
   return (
-    <li key={id} className={`Dossier ${tourner ? 'AnimationTourner' : ''}`}>
+    <li key={id} className="Dossier">
+      {/* {`Dossier ${tourner ? 'AnimationTourner' : ''}`} */}
+
+
+      {/* Si la carteActive est true, ajouter active avec (&& 'active') */}
+      <div className={`carte ${carteActive && 'active'}`}>
+        <div className="endroit">
 
         <div className="couverture" >
-          <IconButton  aria-label="add" className='rotation' onClick={tourner}>
+          <IconButton  aria-label="add" className='rotation' onClick={()=> setCarteActive(true)}>
             <Rotate/>
           </IconButton> 
           <IconButton  aria-label="add" className='edit' onClick={()=>setOuvert(true)}>
@@ -66,6 +74,20 @@ console.log(ouvert);
             </IconButton> 
             
         </div>
+
+        </div>
+        
+        <div className="envers">
+        <IconButton  aria-label="add" className='rotation' onClick={()=> setCarteActive(false)}>
+            <Rotate/>
+          </IconButton> 
+          <a href="">Item 1</a>
+          <a href="">Item 2</a>
+          <a href="">Item 3</a>
+        </div>
+      </div>
+
+        
          
     </li>
   )
