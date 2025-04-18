@@ -1,11 +1,11 @@
 .Dossier{
     position: relative;
     width: 250px;
-    height: 290px;
+    min-height: 290px;
     color: white;
     display: flex;
     flex-direction: column;
-    border: 2px solid black;
+
     
 
     .info{
@@ -50,15 +50,3 @@
     box-shadow: 0 0 15px 3px black;
     transition: all 0.5s;
 }
-
-// .AnimationTourner{
-//     animation: animer 2s infinite;
-// }
-// @keyframes animer {
-//     from {
-//         transform: rotate3d(1, 1, 1,  45deg);
-//     }
-//     to {
-//         transform: rotate3d(0, 0, 0, 0deg)
-//     }
-// }
