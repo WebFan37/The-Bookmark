@@ -95,6 +95,7 @@ dossiers.map(doss => (
  {...doss} 
  supprimer={supprimer} 
  modifier={modifier}
+ utilisateur={utilisateur}
  />
 
  )
